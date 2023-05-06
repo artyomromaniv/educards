@@ -2,17 +2,28 @@ import { instance } from "common/api/common.api";
 
 export const authApi = {
   register: (arg:ArgRegisterType) => {
-
-    return instance.post( 'auth/register',arg)
+    return instance.post<RegisterResponseType>( 'auth/register',arg)
+  },
+  login: (arg:ArgLoginType) => {
+    // TODO
+    return instance.post<ProfileType>('auth/login',arg)
   }
 };
 
 //Type
-export type ArgRegisterType = {
-  email: string,
+export type ArgLoginType = {
+  email: string
   password: string
+  rememberMe: boolean
 }
-export type UserType = {
+
+export type ArgRegisterType = Omit<ArgLoginType, 'rememberMe'>
+
+export type RegisterResponseType = {
+  addedUser: Omit<ProfileType, 'token' | 'tokenDeathTime'>
+}
+
+export type ProfileType = {
   _id: string
   email:string
   rememberMe: boolean
@@ -22,5 +33,9 @@ export type UserType = {
   publicCardPacksCount: number
   created:string
   updated: string
-  __v: number;
+  __v: number
+  token: string
+  tokenDeathTime: number
 }
+
+

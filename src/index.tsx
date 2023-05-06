@@ -8,6 +8,7 @@ import "./index.css";
 import { createBrowserRouter } from "react-router-dom";
 import Root from "routes/root";
 import { Register } from "features/auth/Register/Register";
+import { Login } from "features/auth/Login/Login";
 
 
 const router = createBrowserRouter([
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <h1>Login</h1>,
+    element: <Login/>,
   },
   {
     path: "/register",
